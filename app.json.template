@@ -1,0 +1,32 @@
+{
+  "name": "my-miniapp",
+  "version": "1.0.0",
+  "port": 3000,
+  "start": "node server.js",
+
+  "_guide": "CHỌN 1 TRONG CÁC CÁCH KHAI BÁO RUNTIME DƯỚI ĐÂY:",
+
+  "runtime_examples": {
+    "node_direct_url": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-win-x64.zip",
+    "node_version_tag": "node@22.14.0",
+    "node_custom_object": {
+      "name": "node@22",
+      "version": "v22.14.0",
+      "url": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-win-x64.zip"
+    },
+    "python_version_tag": "python@3.11.9",
+    "python_direct_url": "https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip",
+    "standalone_binary": "none"
+  },
+
+  "runtime": "node@22.14.0",
+
+  "tools": [
+    "cloudflared"
+  ],
+
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000"
+  }
+}
