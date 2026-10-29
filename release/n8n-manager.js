@@ -157,23 +157,35 @@ const start = async () => {
         });
     };
 
-    // State checking using status.json to ensure correct install/run path
+    // Đọc phiên bản n8n động từ app.json (do Cloud CMS quản lý)
+    let targetVersion = '2.45.5';
+    try {
+        const appJsonPath = path.join(appConfig.APP_DIR, 'app.json');
+        if (fs.existsSync(appJsonPath)) {
+            const appJson = JSON.parse(fs.readFileSync(appJsonPath, 'utf8'));
+            if (appJson.version) targetVersion = appJson.version;
+        }
+    } catch (e) { }
+
+    // State checking using status.json to ensure correct install/run path and version
     const statusFile = path.join(appConfig.DATA_DIR, 'status.json');
     let installStatus = 'not_installed';
+    let installedVersion = null;
     if (fs.existsSync(statusFile)) {
         try {
             const statusObj = JSON.parse(fs.readFileSync(statusFile, 'utf8'));
             installStatus = statusObj.status || 'not_installed';
+            installedVersion = statusObj.version || null;
         } catch (e) { }
     }
 
     const saveStatus = (status) => {
         try {
-            fs.writeFileSync(statusFile, JSON.stringify({ status: status, updatedAt: new Date().toISOString() }, null, 2), 'utf8');
+            fs.writeFileSync(statusFile, JSON.stringify({ status: status, version: targetVersion, updatedAt: new Date().toISOString() }, null, 2), 'utf8');
         } catch (e) { }
     };
 
-    if (fs.existsSync(engineBin) && installStatus === 'success') {
+    if (fs.existsSync(engineBin) && installStatus === 'success' && installedVersion === targetVersion) {
         sendLog('Phát hiện n8n core (Đã xác minh cấu hình), đang kích hoạt...', 'info');
         engineProcess = spawn(nodePath, [engineBin, 'start'], { env, cwd: appConfig.ENGINE_USER_FOLDER });
     } else {
@@ -203,7 +215,7 @@ const start = async () => {
             '--no-workspaces',
             '--no-package-lock',
             '--loglevel=info',
-            'n8n@2.45.5',
+            `n8n@${targetVersion}`,
             'sqlite3@5.1.7'
         ], { env, cwd: appConfig.ENGINE_USER_FOLDER, shell: true });
 
