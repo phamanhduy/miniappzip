@@ -31,10 +31,12 @@ function ensureAppFolders() {
     }
 }
 
-// 3. Tìm Node.js binary từ thư mục gốc dự án hoặc hệ thống
+// 3. Tìm Node.js binary từ thư mục gốc dự án hoặc hệ thống (Cross-platform)
 function getNodePath() {
     const rootDir = path.resolve(APP_DIR, '..', '..');
-    const possibleNode = path.join(rootDir, 'bin', 'node', 'node.exe');
+    const isWin = process.platform === 'win32';
+    const exeName = isWin ? 'node.exe' : 'node';
+    const possibleNode = path.join(rootDir, 'bin', 'node', exeName);
     if (fs.existsSync(possibleNode)) {
         return { nodePath: possibleNode, nodeBinDir: path.join(rootDir, 'bin', 'node') };
     }

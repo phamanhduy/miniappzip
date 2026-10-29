@@ -55,7 +55,11 @@ const checkPort = () => {
 
 const killPort = async () => {
     try {
-        execSync(`for /f "tokens=5" %a in ('netstat -aon ^| findstr :${port} ^| findstr LISTENING') do taskkill /F /PID %a`, { stdio: 'ignore', shell: 'cmd.exe' });
+        if (process.platform === 'win32') {
+            execSync(`for /f "tokens=5" %a in ('netstat -aon ^| findstr :${port} ^| findstr LISTENING') do taskkill /F /PID %a`, { stdio: 'ignore', shell: 'cmd.exe' });
+        } else {
+            execSync(`fuser -k ${port}/tcp || (lsof -t -i:${port} | xargs kill -9)`, { stdio: 'ignore', shell: '/bin/sh' });
+        }
     } catch (e) { }
 };
 
@@ -143,7 +147,7 @@ const start = async () => {
 
     if (nodeBinDir) {
         const existingPath = process.env.PATH || process.env.Path || '';
-        env.PATH = nodeBinDir + ';' + existingPath;
+        env.PATH = nodeBinDir + (process.platform === 'win32' ? ';' : ':') + existingPath;
         env.Path = env.PATH;
     }
 
@@ -194,14 +198,14 @@ const start = async () => {
         sendLog('Đang chuẩn bị tải thư viện n8n, vui lòng chờ trong giây lát...', 'info');
 
         let npmCmd = 'npm';
-        // Resolve correct npm command (prefer project portable npm.cmd, fallback to global npm)
-        const possibleNpmCmd = path.join(nodeBinDir || '', 'npm.cmd');
+        const isWin = process.platform === 'win32';
+        const npmExe = isWin ? 'npm.cmd' : 'npm';
+        const possibleNpmCmd = path.join(nodeBinDir || '', npmExe);
         if (fs.existsSync(possibleNpmCmd)) {
             npmCmd = possibleNpmCmd;
         } else {
-            // Check if portable npm exists in root package bin
             const rootDir = path.resolve(appConfig.APP_DIR, '..', '..');
-            const rootPortableNpm = path.join(rootDir, 'bin', 'node', 'npm.cmd');
+            const rootPortableNpm = path.join(rootDir, 'bin', 'node', npmExe);
             if (fs.existsSync(rootPortableNpm)) {
                 npmCmd = rootPortableNpm;
             }
@@ -287,7 +291,13 @@ const start = async () => {
 const stop = async () => {
     sendLog('Đang dừng N8N Mini App...', 'warning');
     if (engineProcess) {
-        try { execSync(`taskkill /F /T /PID ${engineProcess.pid}`, { stdio: 'ignore' }); } catch (e) { }
+        try {
+            if (process.platform === 'win32') {
+                execSync(`taskkill /F /T /PID ${engineProcess.pid}`, { stdio: 'ignore' });
+            } else {
+                process.kill(engineProcess.pid, 'SIGKILL');
+            }
+        } catch (e) { }
         engineProcess = null;
     }
     await killPort();

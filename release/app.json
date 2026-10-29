@@ -1,16 +1,19 @@
 {
   "name": "n8n",
-  "version": "1.0.0",
+  "version": "2.45.5",
+  "port": 5678,
+  "subdomain": "n8n",
   "runtime": {
     "name": "node@26",
     "version": "v26.13.0",
-    "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-win-x64.zip"
+    "downloadUrl": {
+      "windows/amd64": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-win-x64.zip",
+      "linux/amd64": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-linux-x64.tar.xz"
+    }
   },
   "tools": [
     "cloudflared"
   ],
-  "port": 5678,
-  "start": "node n8n-manager.js start",
   "env": {
     "NODE_ENV": "production"
   }
