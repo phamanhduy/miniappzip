@@ -2,9 +2,9 @@
   "name": "n8n",
   "version": "1.0.0",
   "runtime": {
-    "name": "node@22",
-    "version": "v22.20.0",
-    "url": "https://nodejs.org/dist/v22.20.0/node-v22.20.0-win-x64.zip"
+    "name": "node@26",
+    "version": "v26.13.0",
+    "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-win-x64.zip"
   },
   "tools": [
     "cloudflared"
