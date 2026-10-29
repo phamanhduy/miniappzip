@@ -4,11 +4,11 @@
   "port": 5678,
   "subdomain": "n8n",
   "runtime": {
-    "name": "node@26",
-    "version": "v26.13.0",
+    "name": "node@24",
+    "version": "v24.22.2",
     "downloadUrl": {
-      "windows/amd64": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-win-x64.zip",
-      "linux/amd64": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-linux-x64.tar.xz"
+      "windows/amd64": "https://nodejs.org/dist/v24.22.2/node-v24.22.2-win-x64.zip",
+      "linux/amd64": "https://nodejs.org/dist/v24.22.2/node-v24.22.2-linux-x64.tar.xz"
     }
   },
   "tools": [

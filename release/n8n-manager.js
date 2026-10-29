@@ -205,9 +205,16 @@ const start = async () => {
             npmCmd = possibleNpmCmd;
         } else {
             const rootDir = path.resolve(appConfig.APP_DIR, '..', '..');
-            const rootPortableNpm = path.join(rootDir, 'bin', 'node', npmExe);
-            if (fs.existsSync(rootPortableNpm)) {
-                npmCmd = rootPortableNpm;
+            const searchDirs = [
+                path.join(rootDir, 'Environments', 'node', '24', npmExe),
+                path.join(rootDir, 'Environments', 'node', '26', npmExe),
+                path.join(rootDir, 'bin', 'node', npmExe)
+            ];
+            for (const sp of searchDirs) {
+                if (fs.existsSync(sp)) {
+                    npmCmd = sp;
+                    break;
+                }
             }
         }
 
