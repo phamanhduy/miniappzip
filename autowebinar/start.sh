@@ -44,3 +44,4 @@ if [ -f "$DIR/.env" ]; then
 else
     exec node dist/index.js
 fi
+

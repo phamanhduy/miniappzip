@@ -37,3 +37,4 @@ for /f "tokens=5" %%a in ('netstat -aon ^| findstr /r ":%TARGET_PORT% .*LISTENIN
 taskkill /F /IM node.exe /FI "WINDOWTITLE eq *AutoMeet Webinar*" >nul 2>&1
 
 echo AutoMeet Webinar stopped successfully.
+
