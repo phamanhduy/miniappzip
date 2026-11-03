@@ -1,0 +1,40 @@
+{
+  "name": "AutoMeet Webinar",
+  "version": "1.0.2",
+  "port": 3007,
+  "subdomain": "livewebinar",
+  "zip_url": "https://github.com/phamanhduy/miniappzip/raw/refs/heads/main/autowebinar.zip",
+  "branch": "apps/autowebinar",
+  "start": "node dist/index.js",
+  "run_script": "start.bat",
+  "stop_script": "stop.bat",
+  "run_script_linux": "start.sh",
+  "stop_script_linux": "stop.sh",
+  "runtime": {
+    "name": "node@22",
+    "version": "v22.14.0",
+    "downloadUrl": {
+      "windows/amd64": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-win-x64.zip",
+      "linux/amd64": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz"
+    }
+  },
+  "tools": [
+    "cloudflared"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3007"
+  },
+  "log_version": [
+    {
+      "version": "1.0.1",
+      "description": "tinh nang moissssss",
+      "time": "16/06/2026"
+    },
+    {
+      "version": "1.0.2",
+      "description": "thêm tính năng mói nhất \n Sử dụng ssss",
+      "time": "16/06/2026"
+    }
+  ]
+}
