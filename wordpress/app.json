@@ -7,6 +7,8 @@
   "branch": "apps/wordpress",
   "run_script": "start.bat",
   "stop_script": "stop.bat",
+  "run_script_linux": "start.sh",
+  "stop_script_linux": "stop.sh",
   "tools": [
     "cloudflared"
   ],
