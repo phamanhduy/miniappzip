@@ -1,0 +1,21 @@
+services:
+  zalocrm:
+    build: .
+    container_name: zalocrm-app
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./zalocrm.db:/app/zalocrm.db
+      - ./uploads:/app/uploads
+      - ./.env:/app/.env
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - IS_DOCKER=true
+      - SKIP_LICENSE=true
+      # - APP_URL=https://crm.yourdomain.com

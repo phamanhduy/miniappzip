@@ -1,0 +1,37 @@
+{
+  "name": "ZaloCRM",
+  "version": "1.0.2",
+  "port": 3006,
+  "subdomain": "zalocrm",
+  "zip_url": "https://github.com/phamanhduy/miniappzip/raw/refs/heads/main/ZaloCRM.zip",
+  "branch": "apps/zalocrm",
+  "run_script": "start.bat",
+  "runtime": {
+    "name": "node@24",
+    "version": "v24.22.2",
+    "downloadUrl": {
+      "windows/amd64": "https://nodejs.org/dist/v24.22.2/node-v24.22.2-win-x64.zip",
+      "linux/amd64": "https://nodejs.org/dist/v24.22.2/node-v24.22.2-linux-x64.tar.xz"
+    }
+  },
+  "tools": [
+    "cloudflared"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3006"
+  },
+  "log_version": [
+    {
+      "version": "1.0.1",
+      "description": "tinh nang moissssss",
+      "time": "16/06/2026"
+    },
+    {
+      "version": "1.0.2",
+      "description": "thêm tính năng mói nhất \n Sử dụng ssss",
+      "time": "16/06/2026"
+    }
+  ]
+}
+

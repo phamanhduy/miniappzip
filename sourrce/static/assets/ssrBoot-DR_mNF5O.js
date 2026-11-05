@@ -1,0 +1,1 @@
+import{P as e,ct as t,dt as n,pt as r}from"./runtime-core.esm-bundler-DOKJAV8k.js";function i(){let i=n(!1);return e(()=>{window.requestAnimationFrame(()=>{i.value=!0})}),{ssrBootStyles:r(()=>i.value?void 0:{transition:`none !important`}),isBooted:t(i)}}export{i as t};
